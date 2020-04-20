@@ -26,18 +26,6 @@ export class Cookies {
     }
   }
 
-  static connect(keys: Keygrip) {
-    return this.express(keys);
-  }
-
-  static express(keys: Keygrip) {
-    return function (req: MinRequest, res: MinResponse, next: () => void) {
-      req.cookies = res.cookies = new Cookies(req, res, { keys } as any);
-
-      next();
-    };
-  }
-
   /**
    * This extracts the cookie with the given name from the Cookie header in the request.
    * If such a cookie exists, its value is returned. Otherwise, nothing is returned.

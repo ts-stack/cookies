@@ -37,10 +37,6 @@ A Boolean can optionally be passed as _options.secure_ to explicitally specify i
 
 Note that since this only saves parameters without any other processing, it is very lightweight. Cookies are only parsed on demand when they are accessed.
 
-### express.createServer( Cookies.express( keys ) )
-
-This adds cookie support as a Connect middleware layer for use in Express apps, allowing inbound cookies to be read using `req.cookies.get` and outbound cookies to be set using `res.cookies.set`.
-
 ### cookies.get( name, [ options ] )
 
 This extracts the cookie with the given name from the `Cookie` header in the request. If such a cookie exists, its value is returned. Otherwise, nothing is returned.
