@@ -155,21 +155,6 @@ describeExpress('Express', function () {
   })
 
   describe('when "secure: true"', function () {
-    it('should not set when not secure', function (done) {
-      var app = express()
-
-      app.set('env', 'test')
-      app.use(cookies(keys))
-      app.use(function (req, res) {
-        res.cookies.set('foo', 'bar', {secure: true})
-        res.end()
-      })
-
-      request(app)
-        .get('/')
-        .expect(500, /Cannot send secure cookie over unencrypted connection/, done)
-    })
-
     it('should set for secure connection', function (done) {
       var app = express()
 

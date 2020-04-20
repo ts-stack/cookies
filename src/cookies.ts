@@ -5,7 +5,6 @@
  * MIT Licensed
  */
 
-import http = require('http');
 import Keygrip = require('keygrip');
 
 import { Cookie } from './cookie';
@@ -81,21 +80,13 @@ export class Cookies {
    * it will be used to generate the outbound cookie header with `CookieOptions` type.
    */
   set(name: string, value?: any, opts?: CookieOptions) {
-    const req = this.request;
     const res = this.response;
-    const secure =
-      this.secure !== undefined ? !!this.secure : req.protocol === 'https' || (req.connection as any).encrypted;
     const cookie = new Cookie(name, value, opts);
-    const signed = opts && opts.signed !== undefined ? opts.signed : !!this.keys;
+    const signed = opts?.signed !== undefined ? opts.signed : !!this.keys;
+    cookie.secure = opts?.secure !== undefined ? opts.secure : this.secure;
 
     const rawHeaders = res.getHeader('Set-Cookie') || [];
     const headers = typeof rawHeaders == 'string' ? [rawHeaders] : (rawHeaders as string[]);
-
-    if (!secure && opts && opts.secure) {
-      throw new Error('Cannot send secure cookie over unencrypted connection');
-    }
-
-    cookie.secure = opts && opts.secure !== undefined ? opts.secure : secure;
 
     this.pushCookie(headers, cookie);
 
@@ -106,8 +97,7 @@ export class Cookies {
       this.pushCookie(headers, cookie);
     }
 
-    const setHeader = res.setHeader ? res.setHeader : http.OutgoingMessage.prototype.setHeader;
-    setHeader.call(res, 'Set-Cookie', headers);
+    res.setHeader('Set-Cookie', headers);
     return this;
   }
 
