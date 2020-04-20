@@ -9,7 +9,7 @@ import http = require('http');
 import Keygrip = require('keygrip');
 
 import { Cookie } from './cookie';
-import { ObjectAny, CookieOptions, MinRequest, MinResponse } from './types';
+import { ObjectAny, CookieOptions, NodeRequest, NodeResponse } from './types';
 
 const cache: ObjectAny = {};
 
@@ -17,7 +17,7 @@ export class Cookies {
   protected secure: boolean;
   protected keys: Keygrip;
 
-  constructor(protected request: MinRequest, protected response: MinResponse, options: CookieOptions) {
+  constructor(protected request: NodeRequest, protected response: NodeResponse, options: CookieOptions) {
     this.secure = undefined;
 
     if (options) {
@@ -106,7 +106,7 @@ export class Cookies {
       this.pushCookie(headers, cookie);
     }
 
-    const setHeader = res.set ? http.OutgoingMessage.prototype.setHeader : res.setHeader;
+    const setHeader = res.setHeader ? res.setHeader : http.OutgoingMessage.prototype.setHeader;
     setHeader.call(res, 'Set-Cookie', headers);
     return this;
   }

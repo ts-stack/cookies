@@ -1,5 +1,8 @@
-import { Socket } from 'net';
 import http = require('http');
+import { Http2ServerRequest, Http2ServerResponse } from 'http2';
+
+export type NodeRequest = http.IncomingMessage | Http2ServerRequest;
+export type NodeResponse = http.ServerResponse | Http2ServerResponse;
 
 export interface ObjectAny {
   [key: string]: any;
@@ -50,24 +53,4 @@ export class CookieOptions {
    * are filtered out of the Set-Cookie header when setting this cookie.
    */
   overwrite?: boolean;
-}
-
-/**
- * An interface with minimal requirements to Request.
- */
-export interface MinRequest {
-  headers: http.IncomingHttpHeaders;
-  protocol?: 'http' | 'https';
-  connection?: Socket;
-  cookies?: any;
-  [key: string]: any;
-}
-
-/**
- * An interface with minimal requirements to Response.
- */
-export interface MinResponse {
-  getHeader(name: string): string | number | string[];
-  setHeader(name: string, value: string | number | string[]): void;
-  [key: string]: any;
 }
