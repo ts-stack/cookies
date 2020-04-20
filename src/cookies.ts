@@ -99,13 +99,13 @@ export class Cookies {
     return this;
   }
 
-  private getPattern(name: string) {
+  protected getPattern(name: string) {
     if (cache[name]) return cache[name];
 
     return (cache[name] = new RegExp('(?:^|;) *' + name.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&') + '=([^;]*)'));
   }
 
-  private pushCookie(headers: string[], cookie: Cookie) {
+  protected pushCookie(headers: string[], cookie: Cookie) {
     if (cookie.overwrite) {
       for (let i = headers.length - 1; i >= 0; i--) {
         if (headers[i].indexOf(cookie.name + '=') === 0) {
