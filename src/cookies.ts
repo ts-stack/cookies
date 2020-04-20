@@ -14,7 +14,6 @@ import { ObjectAny, CookieOptions, MinRequest, MinResponse } from './types';
 const cache: ObjectAny = {};
 
 export class Cookies {
-  static Cookie = Cookie;
   protected secure: boolean;
   protected keys: Keygrip;
 
