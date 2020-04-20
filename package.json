@@ -1,15 +1,12 @@
 {
-  "name": "cookies",
+  "name": "@ts-stack/cookies",
   "description": "Cookies, optionally signed using Keygrip.",
-  "version": "0.8.0",
+  "version": "1.0.1",
   "author": "Jed Schmidt <tr@nslator.jp> (http://jed.is)",
-  "contributors": [
-    "Douglas Christopher Wilson <doug@somethingdoug.com>"
-  ],
   "license": "MIT",
   "main": "dist/index",
   "types": "dist/index",
-  "repository": "pillarjs/cookies",
+  "repository": "https://github.com/ts-stack/cookies",
   "scripts": {
     "lint": "tslint -p .",
     "test": "mocha --require test/support/env --reporter spec --bail --check-leaks test/",
@@ -33,14 +30,5 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.3.0",
     "typescript": "^3.8.3"
-  },
-  "files": [
-    "HISTORY.md",
-    "LICENSE",
-    "README.md",
-    "index.js"
-  ],
-  "engines": {
-    "node": ">= 0.8"
   }
 }

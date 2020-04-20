@@ -16,7 +16,7 @@ export class Cookies {
   protected secure: boolean;
   protected keys: Keygrip;
 
-  constructor(protected request: NodeRequest, protected response: NodeResponse, options: CookieOptions) {
+  constructor(protected request: NodeRequest, protected response: NodeResponse, options?: CookieOptions) {
     this.secure = undefined;
 
     if (options) {

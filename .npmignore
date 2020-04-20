@@ -1,0 +1,6 @@
+test
+*.log
+src
+.*
+*.tgz
+HISTORY.md
