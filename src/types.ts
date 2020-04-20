@@ -52,14 +52,20 @@ export class CookieOptions {
   overwrite?: boolean;
 }
 
+/**
+ * An interface with minimal requirements to Request.
+ */
 export interface MinRequest {
   headers: http.IncomingHttpHeaders;
-  protocol: 'http' | 'https';
+  protocol?: 'http' | 'https';
   connection?: Socket;
   cookies?: any;
   [key: string]: any;
 }
 
+/**
+ * An interface with minimal requirements to Response.
+ */
 export interface MinResponse {
   getHeader(name: string): string | number | string[];
   setHeader(name: string, value: string | number | string[]): void;

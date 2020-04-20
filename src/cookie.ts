@@ -20,13 +20,13 @@ export class Cookie {
   path = '/';
   expires: Date = undefined;
   domain: string = undefined;
-  httpOnly = true;
-  sameSite = false;
-  secure = false;
-  overwrite = false;
+  httpOnly: boolean = true;
+  sameSite: boolean = false;
+  secure: boolean = false;
+  overwrite: boolean = false;
   maxAge: number;
 
-  constructor(public name: string, public value: any, attrs: CookieOptions) {
+  constructor(public name: string, public value?: any, attrs?: CookieOptions) {
     if (!fieldContentRegExp.test(name)) {
       throw new TypeError('argument name is invalid');
     }
@@ -56,11 +56,11 @@ export class Cookie {
     }
   }
 
-  toString = function () {
-    return this.name + '=' + this.value;
-  };
+  toString() {
+    return `${this.name}=${this.value}`;
+  }
 
-  toHeader = function () {
+  toHeader() {
     let header = this.toString();
 
     if (this.maxAge) this.expires = new Date(Date.now() + this.maxAge);
@@ -68,10 +68,12 @@ export class Cookie {
     if (this.path) header += '; path=' + this.path;
     if (this.expires) header += '; expires=' + this.expires.toUTCString();
     if (this.domain) header += '; domain=' + this.domain;
-    if (this.sameSite) header += '; samesite=' + (this.sameSite === true ? 'strict' : this.sameSite.toLowerCase());
+    if (this.sameSite) {
+      header += '; samesite=' + (this.sameSite === true ? 'strict' : (this.sameSite as string).toLowerCase());
+    }
     if (this.secure) header += '; secure';
     if (this.httpOnly) header += '; httponly';
 
     return header;
-  };
+  }
 }
