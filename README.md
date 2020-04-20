@@ -90,19 +90,19 @@ If your Koa or Express server is properly configured, the `protocol` property of
 ## Example
 
 ```js
-var http = require('http')
-var Cookies = require('cookies')
+import http = require('http')
+import { Cookies } from '@ts-stack/cookies';
 
 // Optionally define keys to sign cookie values
 // to prevent client tampering
-var keys = ['keyboard cat']
+const keys = ['keyboard cat']
 
-var server = http.createServer(function (req, res) {
+const server = http.createServer((req, res) => {
   // Create a cookies object
-  var cookies = new Cookies(req, res, { keys: keys })
+  const cookies = new Cookies(req, res, { keys })
 
   // Get a cookie
-  var lastVisit = cookies.get('LastVisit', { signed: true })
+  const lastVisit = cookies.get('LastVisit', { signed: true })
 
   // Set the cookie to a value
   cookies.set('LastVisit', new Date().toISOString(), { signed: true })
