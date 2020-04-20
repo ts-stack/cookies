@@ -25,8 +25,6 @@ export class CookieOptions {
   /**
    * A boolean indicating whether the cookie is only to be sent over HTTPS
    * (`false` by default for HTTP, `true` by default for HTTPS).
-   *
-   * Read more [about this option below](#secure-cookies).
    */
   secure?: boolean;
   /**
