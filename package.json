@@ -9,7 +9,7 @@
   "repository": "https://github.com/ts-stack/cookies",
   "scripts": {
     "lint": "tslint -p .",
-    "test": "mocha --require test/support/env --reporter spec --bail --check-leaks test/",
+    "test": "rimraf dist/* && tsc && mocha --require test/support/env --reporter spec --bail --check-leaks test/",
     "test-ci": "nyc --reporter=text npm test",
     "test-cov": "nyc --reporter=html --reporter=text npm test"
   },
