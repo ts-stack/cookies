@@ -18,17 +18,17 @@
   },
   "devDependencies": {
     "@types/keygrip": "^1.0.2",
-    "@types/node": "^13.13.0",
+    "@types/node": "^15.6.1",
     "express": "4.17.1",
-    "mocha": "7.1.1",
-    "nyc": "15.0.1",
-    "prettier": "^2.0.4",
+    "mocha": "8.4.0",
+    "nyc": "15.1.0",
+    "prettier": "^2.3.0",
     "restify": "8.5.1",
     "rimraf": "^3.0.2",
-    "supertest": "4.0.2",
+    "supertest": "6.1.3",
     "tslint": "^6.1.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.3.0",
-    "typescript": "^3.8.3"
+    "typescript": "^4.3.2"
   }
 }
