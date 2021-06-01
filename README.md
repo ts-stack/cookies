@@ -1,7 +1,7 @@
 Cookies
 =======
 
-This is a fork of [cookies](https://github.com/pillarjs/cookies) writen in TypeScript.
+This is a fork of [cookies from this commit](https://github.com/pillarjs/cookies/commit/d2111627) writen in TypeScript.
 
 Cookies is a [node.js](http://nodejs.org/) module for getting and setting HTTP(S) cookies. Cookies can be signed to prevent tampering, using [Keygrip](https://www.npmjs.com/package/keygrip). It can be used with the built-in node.js HTTP library, or as Connect/Express middleware.
 
