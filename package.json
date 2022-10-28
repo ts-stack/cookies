@@ -1,7 +1,7 @@
 {
   "name": "@ts-stack/cookies",
   "description": "Cookies, optionally signed using Keygrip.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Jed Schmidt <tr@nslator.jp> (http://jed.is)",
   "license": "MIT",
   "main": "dist/index",
@@ -19,10 +19,10 @@
     "find-my-way": "^2.2.5"
   },
   "dependencies": {
-    "keygrip": "~1.1.0"
+    "keygrip": "~1.1.0",
+    "@types/keygrip": "^1.0.2"
   },
   "devDependencies": {
-    "@types/keygrip": "^1.0.2",
     "@types/node": "^15.6.1",
     "express": "4.17.1",
     "mocha": "8.4.0",
