@@ -23,15 +23,11 @@
     "test-ci": "nyc --reporter=text npm test",
     "test-cov": "nyc --reporter=html --reporter=text npm test"
   },
-  "resolutions": {
-    "mixme": "^0.5.1",
-    "find-my-way": "^2.2.5"
-  },
   "dependencies": {
-    "@types/keygrip": "^1.0.3",
     "keygrip": "~1.1.0"
   },
   "devDependencies": {
+    "@types/keygrip": "^1.0.3",
     "@types/eslint": "^8.44.3",
     "@types/node": "^20.8.3",
     "@typescript-eslint/eslint-plugin": "^6.7.5",
