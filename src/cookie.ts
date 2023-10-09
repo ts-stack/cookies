@@ -22,12 +22,16 @@ export class Cookie {
   expires?: Date = undefined;
   domain?: string = undefined;
   httpOnly?: boolean = true;
-  sameSite: boolean = false;
+  sameSite?: boolean = false;
   secure?: boolean = false;
   overwrite?: boolean = false;
   maxAge?: number | null;
 
-  constructor(public name: string, public value?: any, attrs?: CookieOptions) {
+  constructor(
+    public name: string,
+    public value?: any,
+    attrs?: CookieOptions,
+  ) {
     if (!fieldContentRegExp.test(name)) {
       throw new TypeError('argument name is invalid');
     }
@@ -37,7 +41,7 @@ export class Cookie {
     }
 
     this.value = value || '';
-    Object.assign(this, attrs);
+    this.copyOpts(attrs);
 
     if (!this.value) {
       this.expires = new Date(0);
@@ -55,6 +59,14 @@ export class Cookie {
     if (this.sameSite && this.sameSite !== true && !SAME_SITE_REGEXP.test(this.sameSite)) {
       throw new TypeError('option sameSite is invalid');
     }
+  }
+
+  protected copyOpts(attrs: CookieOptions = {}) {
+    Object.entries(attrs).forEach(([key, val]) => {
+      if (val !== undefined) {
+        (this as any)[key] = val;
+      }
+    });
   }
 
   toString() {
