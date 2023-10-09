@@ -6,7 +6,7 @@
  * obs-text      = %x80-FF
  */
 
-import { CookieOptions } from './types';
+import { CookieOptions } from './types.js';
 
 const fieldContentRegExp = /^[\u0009\u0020-\u007e\u0080-\u00ff]+$/;
 
@@ -18,13 +18,13 @@ const SAME_SITE_REGEXP = /^(?:lax|none|strict)$/i;
 
 export class Cookie {
   path = '/';
-  expires: Date = undefined;
-  domain: string = undefined;
+  expires?: Date = undefined;
+  domain?: string = undefined;
   httpOnly: boolean = true;
   sameSite: boolean = false;
-  secure: boolean = false;
+  secure?: boolean = false;
   overwrite: boolean = false;
-  maxAge: number;
+  maxAge: number | null;
 
   constructor(public name: string, public value?: any, attrs?: CookieOptions) {
     if (!fieldContentRegExp.test(name)) {

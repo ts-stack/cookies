@@ -1,39 +1,48 @@
 {
   "name": "@ts-stack/cookies",
+  "type": "module",
   "description": "Cookies, optionally signed using Keygrip.",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "author": "Jed Schmidt <tr@nslator.jp> (http://jed.is)",
   "license": "MIT",
-  "main": "dist/index",
-  "types": "dist/index",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "import": "./dist-mjs/index.js",
+      "require": "./dist-cjs/index.js",
+      "default": "./dist-mjs/index.js"
+    }
+  },
   "repository": "https://github.com/ts-stack/cookies",
   "scripts": {
+    "build": "tsc -b tsconfig.mjs.json && tsc -b tsconfig.cjs.json && cp package.cjs.json dist-cjs/package.json",
     "lint": "tslint -p .",
-    "test": "rimraf dist/* && tsc && mocha --require test/support/env --reporter spec --bail --check-leaks test/",
+    "test": "mocha --require test/support/env.cjs --reporter spec --bail --check-leaks test/",
     "test-ci": "nyc --reporter=text npm test",
-    "test-cov": "nyc --reporter=html --reporter=text npm test",
-    "build": "rimraf dist/* && tsc"
+    "test-cov": "nyc --reporter=html --reporter=text npm test"
   },
   "resolutions": {
     "mixme": "^0.5.1",
     "find-my-way": "^2.2.5"
   },
   "dependencies": {
-    "keygrip": "~1.1.0",
-    "@types/keygrip": "^1.0.2"
+    "@types/keygrip": "^1.0.3",
+    "keygrip": "~1.1.0"
   },
   "devDependencies": {
-    "@types/node": "^15.6.1",
-    "express": "4.17.1",
-    "mocha": "8.4.0",
+    "@types/node": "^20.8.3",
+    "express": "4.18.2",
+    "mocha": "10.2.0",
     "nyc": "15.1.0",
-    "prettier": "^2.3.0",
-    "restify": "8.5.1",
-    "rimraf": "^3.0.2",
-    "supertest": "6.1.3",
+    "prettier": "^3.0.3",
+    "restify": "11.1.0",
+    "rimraf": "^5.0.5",
+    "supertest": "6.3.3",
     "tslint": "^6.1.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.3.0",
-    "typescript": "^4.3.2"
+    "typescript": "^5.2.2"
   }
 }

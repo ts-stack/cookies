@@ -1,8 +1,8 @@
-import http = require('http');
-import { Http2ServerRequest, Http2ServerResponse } from 'http2';
+import type { IncomingMessage, ServerResponse } from 'node:http';
+import type { Http2ServerRequest, Http2ServerResponse } from 'node:http2';
 
-export type NodeRequest = http.IncomingMessage | Http2ServerRequest;
-export type NodeResponse = http.ServerResponse | Http2ServerResponse;
+export type NodeRequest = IncomingMessage | Http2ServerRequest;
+export type NodeResponse = ServerResponse | Http2ServerResponse;
 
 export interface ObjectAny {
   [key: string]: any;

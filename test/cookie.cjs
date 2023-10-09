@@ -1,6 +1,6 @@
 
 var assert = require('assert')
-const Cookie = require('../dist').Cookie;
+const Cookie = require('../dist-cjs').Cookie;
 
 describe('new Cookie(name, value, [options])', function () {
   it('should have correct constructor', function () {

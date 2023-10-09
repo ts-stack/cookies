@@ -1,6 +1,6 @@
 
 var assert = require('assert')
-const Cookies = require('../dist').Cookies;
+const Cookies = require('../dist-cjs').Cookies;
 var fs = require('fs')
 var http = require('http')
 var https = require('https')

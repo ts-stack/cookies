@@ -1,5 +1,6 @@
 test
 *.log
+*.tsbuildinfo
 .*
 *.tgz
 HISTORY.md

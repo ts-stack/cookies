@@ -1,3 +1,3 @@
-export { Cookies } from './cookies';
-export { Cookie } from './cookie';
-export { CookieOptions, NodeRequest, NodeResponse } from './types';
+export { Cookies } from './cookies.js';
+export { Cookie } from './cookie.js';
+export { CookieOptions, NodeRequest, NodeResponse } from './types.js';

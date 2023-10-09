@@ -5,22 +5,22 @@
  * MIT Licensed
  */
 
-import Keygrip = require('keygrip');
+import * as Keygrip from 'keygrip';
 
-import { Cookie } from './cookie';
-import { ObjectAny, CookieOptions, NodeRequest, NodeResponse } from './types';
+import { Cookie } from './cookie.js';
+import { ObjectAny, CookieOptions, NodeRequest, NodeResponse } from './types.js';
 
 const cache: ObjectAny = {};
 
 export class Cookies {
-  protected secure: boolean;
+  protected secure?: boolean;
   protected keys: Keygrip;
 
   constructor(protected request: NodeRequest, protected response: NodeResponse, options?: CookieOptions) {
     this.secure = undefined;
 
     if (options) {
-      this.keys = Array.isArray((options as any).keys) ? new Keygrip((options as any).keys) : (options as any).keys;
+      this.keys = Array.isArray((options as any).keys) ? new (Keygrip as any)((options as any).keys) : (options as any).keys;
       this.secure = options.secure;
     }
   }
@@ -64,6 +64,7 @@ export class Cookies {
 
     if (index < 0) {
       this.set(sigName, null, { path: '/', signed: false });
+      return;
     } else {
       if (index) {
         this.set(sigName, this.keys.sign(data), { signed: false });

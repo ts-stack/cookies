@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "baseUrl": ".",
+    "outDir": "dist-mjs",
+    "rootDir": "src",
+    "tsBuildInfoFile": "dist-mjs/build.tsbuildinfo",
+  },
+  "include": ["src"]
+}

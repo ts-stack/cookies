@@ -3,7 +3,7 @@ var assert = require( "assert" )
   , keys = require( "keygrip" )(['a', 'b'])
   , request = require('supertest');
 
-const Cookies = require('../dist').Cookies;
+const Cookies = require('../dist-cjs').Cookies;
 
 function cookies(keys) {
   return function (req, res, next) {

@@ -1,7 +1,7 @@
 var assert = require('assert')
   , request = require('supertest');
 
-const Cookies = require('../dist').Cookies;
+const Cookies = require('../dist-cjs').Cookies;
 
 var restify = tryRequire('restify')
 
@@ -11,7 +11,7 @@ describeRestify('Restify', function () {
   it('should set a cookie on the response', function (done) {
     var server = restify.createServer()
 
-    server.get('/', function (req, res) {
+    server.get('/', function (req, res, next) {
       var cookies = new Cookies(req, res)
 
       cookies.set('foo', 'bar')
@@ -30,7 +30,7 @@ describeRestify('Restify', function () {
   it('should get a cookie from the request', function (done) {
     var server = restify.createServer()
 
-    server.get('/', function (req, res) {
+    server.get('/', function (req, res, next) {
       var cookies = new Cookies(req, res)
 
       res.send({ foo: String(cookies.get('foo')) })
@@ -46,7 +46,7 @@ describeRestify('Restify', function () {
     it('should set all cookies on the response', function (done) {
       var server = restify.createServer()
 
-      server.get('/', function (req, res) {
+      server.get('/', function (req, res, next) {
         var cookies = new Cookies(req, res)
 
         cookies.set('foo', 'bar')
@@ -67,7 +67,7 @@ describeRestify('Restify', function () {
     it('should get each cookie from the request', function (done) {
       var server = restify.createServer()
 
-      server.get('/', function (req, res) {
+      server.get('/', function (req, res, next) {
         var cookies = new Cookies(req, res)
 
         res.send({
@@ -87,7 +87,7 @@ describeRestify('Restify', function () {
     it('should set second cookie with same name', function (done) {
       var server = restify.createServer()
 
-      server.get('/', function (req, res) {
+      server.get('/', function (req, res, next) {
         var cookies = new Cookies(req, res)
 
         cookies.set('foo', 'bar')
@@ -110,7 +110,7 @@ describeRestify('Restify', function () {
     it('should replace previously set value', function (done) {
       var server = restify.createServer()
 
-      server.get('/', function (req, res) {
+      server.get('/', function (req, res, next) {
         var cookies = new Cookies(req, res)
 
         cookies.set('foo', 'bar')
