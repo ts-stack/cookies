@@ -18,14 +18,14 @@ const fieldContentRegExp = /^[\u0009\u0020-\u007e\u0080-\u00ff]+$/;
 const SAME_SITE_REGEXP = /^(?:lax|none|strict)$/i;
 
 export class Cookie {
-  path = '/';
+  path?: string = '/';
   expires?: Date = undefined;
   domain?: string = undefined;
-  httpOnly: boolean = true;
+  httpOnly?: boolean = true;
   sameSite: boolean = false;
   secure?: boolean = false;
-  overwrite: boolean = false;
-  maxAge: number | null;
+  overwrite?: boolean = false;
+  maxAge?: number | null;
 
   constructor(public name: string, public value?: any, attrs?: CookieOptions) {
     if (!fieldContentRegExp.test(name)) {
