@@ -28,19 +28,19 @@
     "keygrip": "~1.1.0"
   },
   "devDependencies": {
-    "@types/eslint": "^8.44.3",
-    "@types/keygrip": "^1.0.3",
-    "@types/node": "^20.8.3",
-    "@typescript-eslint/eslint-plugin": "^6.7.5",
-    "@typescript-eslint/parser": "^6.7.5",
-    "eslint": "^8.51.0",
+    "@eslint/js": "^9.9.0",
+    "@types/eslint__js": "^8.42.3",
+    "@types/keygrip": "^1.0.6",
+    "@types/node": "^20.14.15",
+    "eslint": "^8.57.0",
     "express": "4.18.2",
     "mocha": "10.2.0",
     "nyc": "15.1.0",
-    "prettier": "^3.0.3",
+    "prettier": "^3.3.3",
     "restify": "11.1.0",
-    "rimraf": "^5.0.5",
+    "rimraf": "^5.0.10",
     "supertest": "6.3.3",
-    "typescript": "^5.2.2"
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.0.1"
   }
 }
