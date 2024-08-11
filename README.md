@@ -86,7 +86,7 @@ If your Koa or Express server is properly configured, the `protocol` property of
 ## Example
 
 ```js
-import http = require('http')
+import http from 'http';
 import { Cookies } from '@ts-stack/cookies';
 
 // Optionally define keys to sign cookie values
@@ -120,14 +120,3 @@ server.listen(3000, function () {
 ## License
 
 [MIT](LICENSE)
-
-[npm-image]: https://img.shields.io/npm/v/cookies.svg
-[npm-url]: https://npmjs.org/package/cookies
-[coveralls-image]: https://img.shields.io/coveralls/pillarjs/cookies/master.svg
-[coveralls-url]: https://coveralls.io/r/pillarjs/cookies?branch=master
-[downloads-image]: https://img.shields.io/npm/dm/cookies.svg
-[downloads-url]: https://npmjs.org/package/cookies
-[node-version-image]: https://img.shields.io/node/v/cookies.svg
-[node-version-url]: https://nodejs.org/en/download/
-[travis-image]: https://img.shields.io/travis/pillarjs/cookies/master.svg
-[travis-url]: https://travis-ci.org/pillarjs/cookies
