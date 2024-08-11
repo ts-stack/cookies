@@ -5,7 +5,7 @@
  * MIT Licensed
  */
 
-import * as Keygrip from 'keygrip';
+import Keygrip from 'keygrip';
 
 import { Cookie } from './cookie.js';
 import { ObjectAny, CookieOptions, NodeRequest, NodeResponse } from './types.js';
@@ -20,7 +20,7 @@ export class Cookies {
     this.secure = undefined;
 
     if (options) {
-      this.keys = Array.isArray((options as any).keys) ? new (Keygrip as any)((options as any).keys) : (options as any).keys;
+      this.keys = Array.isArray((options as any).keys) ? new Keygrip((options as any).keys) : (options as any).keys;
       this.secure = options.secure;
     }
   }

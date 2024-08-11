@@ -3,6 +3,7 @@
   "compilerOptions": {
     "noEmit": false,
     "module": "CommonJS",
+    "esModuleInterop": true,
     "moduleResolution": "Node",
     "baseUrl": ".",
     "outDir": "dist-cjs",
