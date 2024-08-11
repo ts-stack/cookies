@@ -14,13 +14,13 @@ const cache: ObjectAny = {};
 
 export class Cookies {
   protected secure?: boolean;
-  protected keys: Keygrip;
+  protected keys?: Keygrip;
 
   constructor(protected request: NodeRequest, protected response: NodeResponse, options?: CookieOptions) {
     this.secure = undefined;
 
     if (options) {
-      this.keys = Array.isArray((options as any).keys) ? new Keygrip((options as any).keys) : (options as any).keys;
+      this.keys = Array.isArray(options.keys) ? new Keygrip(options.keys) : options.keys;
       this.secure = options.secure;
     }
   }

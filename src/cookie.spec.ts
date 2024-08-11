@@ -1,9 +1,9 @@
-var assert = require('assert');
-const Cookie = require('../dist-cjs').Cookie;
+import * as assert from 'node:assert';
+import { Cookie } from './cookie.js';
 
 describe('new Cookie(name, value, [options])', function () {
   it('should have correct constructor', function () {
-    var cookie = new Cookie('foo', 'bar');
+    const cookie = new Cookie('foo', 'bar');
     assert.equal(cookie.constructor, Cookie);
   });
 
@@ -34,66 +34,66 @@ describe('new Cookie(name, value, [options])', function () {
   describe('options', function () {
     describe('maxAge', function () {
       it('should set the .maxAge property', function () {
-        var cookie = new Cookie('foo', 'bar', { maxAge: 86400 });
+        const cookie = new Cookie('foo', 'bar', { maxAge: 86400 });
         assert.equal(cookie.maxAge, 86400);
       });
     });
 
     describe('sameSite', function () {
       it('should set the .sameSite property', function () {
-        var cookie = new Cookie('foo', 'bar', { sameSite: true });
+        const cookie = new Cookie('foo', 'bar', { sameSite: true });
         assert.equal(cookie.sameSite, true);
       });
 
       it('should default to false', function () {
-        var cookie = new Cookie('foo', 'bar');
+        const cookie = new Cookie('foo', 'bar');
         assert.equal(cookie.sameSite, false);
       });
 
       it('should throw on invalid value', function () {
         assert.throws(function () {
-          new Cookie('foo', 'bar', { sameSite: 'foo' });
+          new Cookie('foo', 'bar', { sameSite: 'foo' as any });
         }, /option sameSite is invalid/);
       });
 
       describe('when set to "false"', function () {
         it('should not set "samesite" attribute in header', function () {
-          var cookie = new Cookie('foo', 'bar', { sameSite: false });
+          const cookie = new Cookie('foo', 'bar', { sameSite: false });
           assert.equal(cookie.toHeader(), 'foo=bar; path=/; httponly');
         });
       });
 
       describe('when set to "true"', function () {
         it('should set "samesite=strict" attribute in header', function () {
-          var cookie = new Cookie('foo', 'bar', { sameSite: true });
+          const cookie = new Cookie('foo', 'bar', { sameSite: true });
           assert.equal(cookie.toHeader(), 'foo=bar; path=/; samesite=strict; httponly');
         });
       });
 
       describe('when set to "lax"', function () {
         it('should set "samesite=lax" attribute in header', function () {
-          var cookie = new Cookie('foo', 'bar', { sameSite: 'lax' });
+          const cookie = new Cookie('foo', 'bar', { sameSite: 'lax' as any });
           assert.equal(cookie.toHeader(), 'foo=bar; path=/; samesite=lax; httponly');
         });
       });
 
       describe('when set to "none"', function () {
         it('should set "samesite=none" attribute in header', function () {
-          var cookie = new Cookie('foo', 'bar', { sameSite: 'none' });
+          const cookie = new Cookie('foo', 'bar', { sameSite: 'none' as any });
           assert.equal(cookie.toHeader(), 'foo=bar; path=/; samesite=none; httponly');
         });
       });
 
       describe('when set to "strict"', function () {
         it('should set "samesite=strict" attribute in header', function () {
-          var cookie = new Cookie('foo', 'bar', { sameSite: 'strict' });
+          const cookie = new Cookie('foo', 'bar', { sameSite: 'strict' as any });
           assert.equal(cookie.toHeader(), 'foo=bar; path=/; samesite=strict; httponly');
         });
       });
 
       describe('when set to "STRICT"', function () {
         it('should set "samesite=strict" attribute in header', function () {
-          var cookie = new Cookie('foo', 'bar', { sameSite: 'STRICT' });
+          const cookie = new Cookie('foo', 'bar', { sameSite: 'STRICT' as any });
           assert.equal(cookie.toHeader(), 'foo=bar; path=/; samesite=strict; httponly');
         });
       });

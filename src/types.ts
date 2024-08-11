@@ -1,3 +1,4 @@
+import type Keygrip from 'keygrip';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import type { Http2ServerRequest, Http2ServerResponse } from 'node:http2';
 
@@ -53,4 +54,6 @@ export class CookieOptions {
    * are filtered out of the Set-Cookie header when setting this cookie.
    */
   overwrite?: boolean;
+
+  keys?: Keygrip | string[];
 }
