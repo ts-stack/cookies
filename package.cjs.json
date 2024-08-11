@@ -7,12 +7,7 @@
   "license": "MIT",
   "main": "./",
   "repository": "https://github.com/ts-stack/cookies",
-  "resolutions": {
-    "mixme": "^0.5.1",
-    "find-my-way": "^2.2.5"
-  },
   "dependencies": {
-    "@types/keygrip": "^1.0.3",
     "keygrip": "~1.1.0"
   }
 }
