@@ -1,7 +1,8 @@
 import * as assert from 'node:assert';
 import request from 'supertest';
-import { Cookies } from '@ts-stack/cookies';
 import restify from 'restify';
+
+import { Cookies } from '#lib/cookies.js';
 
 describe('Restify', function () {
   it('should set a cookie on the response', function (done) {

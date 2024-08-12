@@ -1,14 +1,14 @@
 Cookies
 =======
 
-This is a fork of [cookies from this state](https://github.com/pillarjs/cookies/tree/d211162) writen in TypeScript.
+This is a fork of [cookies v0.9.1](https://github.com/pillarjs/cookies/tree/0.9.1) writen in TypeScript.
 
 Cookies is a [node.js](http://nodejs.org/) module for getting and setting HTTP(S) cookies. Cookies can be signed to prevent tampering, using [Keygrip](https://www.npmjs.com/package/keygrip). It can be used with the built-in node.js HTTP library, or as Connect/Express middleware.
 
 ## Install
 
 ```
-$ npm install @ts-stack/cookies
+npm install @ts-stack/cookies
 ```
 
 ## Features
@@ -23,17 +23,21 @@ $ npm install @ts-stack/cookies
 
 ## API
 
-### cookies = new Cookies( request, response, [ options ] )
+### new Cookies(request, response [, options])
 
-This creates a cookie jar corresponding to the current _request_ and _response_, additionally passing an object _options_.
+Create a new cookie jar for a given `request` and `response` pair. The `request` argument is a [Node.js HTTP incoming request object](https://nodejs.org/dist/latest-v16.x/docs/api/http.html#class-httpincomingmessage) and the `response` argument is a [Node.js HTTP server response object](https://nodejs.org/dist/latest-v16.x/docs/api/http.html#class-httpserverresponse).
 
 A [Keygrip](https://www.npmjs.com/package/keygrip) object or an array of keys can optionally be passed as _options.keys_ to enable cryptographic signing based on SHA1 HMAC, using rotated credentials.
 
-A Boolean can optionally be passed as _options.secure_ to explicitally specify if the connection is secure, rather than this module examining _request_.
+A Boolean can optionally be passed as `options.secure` to explicitally specify if the connection is secure, rather than this module examining `request`.
 
 Note that since this only saves parameters without any other processing, it is very lightweight. Cookies are only parsed on demand when they are accessed.
 
-### cookies.get( name, [ options ] )
+### Cookies.express(keys)
+
+This adds cookie support as a Connect middleware layer for use in Express apps, allowing inbound cookies to be read using `req.cookies.get` and outbound cookies to be set using `res.cookies.set`.
+
+### cookies.get(name [, options])
 
 This extracts the cookie with the given name from the `Cookie` header in the request. If such a cookie exists, its value is returned. Otherwise, nothing is returned.
 
@@ -45,7 +49,7 @@ If the signature cookie _does_ exist, the provided [Keygrip](https://www.npmjs.c
 * If the signature cookie hash matches any other key, the original cookie value is returned AND an outbound header is set to update the signature cookie's value to the hash of the first key. This enables automatic freshening of signature cookies that have become stale due to key rotation.
 * If the signature cookie hash does not match any key, nothing is returned, and an outbound header with an expired date is used to delete the cookie.
 
-### cookies.set( name, [ value ], [ options ] )
+### cookies.set(name [, values [, options]])
 
 This sets the given cookie in the response and returns the current context to allow chaining.
 
@@ -59,6 +63,8 @@ If the _options_ object is provided, it will be used to generate the outbound co
 * `domain`: a string indicating the domain of the cookie (no default).
 * `secure`: a boolean indicating whether the cookie is only to be sent over HTTPS (`false` by default for HTTP, `true` by default for HTTPS). [Read more about this option below](#secure-cookies).
 * `httpOnly`: a boolean indicating whether the cookie is only to be sent over HTTP(S), and not made available to client JavaScript (`true` by default).
+* `partitioned`: a boolean indicating whether to partition the cookie in Chrome for the [CHIPS Update](https://developers.google.com/privacy-sandbox/3pcd/chips) (`false` by default). If this is true, Cookies from embedded sites will be partitioned and only readable from the same top level site from which it was created.
+* `priority`: a string indicating the cookie priority. This can be set to `'low'`, `'medium'`, or `'high'`.
 * `sameSite`: a boolean or string indicating whether the cookie is a "same site" cookie (`false` by default). This can be set to `'strict'`, `'lax'`, `'none'`, or `true` (which maps to `'strict'`).
 * `signed`: a boolean indicating whether the cookie is to be signed (`false` by default). If this is true, another cookie of the same name with the `.sig` suffix appended will also be sent, with a 27-byte url-safe base64 SHA1 value representing the hash of _cookie-name_=_cookie-value_ against the first [Keygrip](https://www.npmjs.com/package/keygrip) key. This signature key is used to detect tampering the next time a cookie is received.
 * `overwrite`: a boolean indicating whether to overwrite previously set cookies of the same name (`false` by default). If this is true, all cookies set during the same request with the same name (regardless of path or domain) are filtered out of the Set-Cookie header when setting this cookie.

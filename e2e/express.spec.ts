@@ -1,8 +1,9 @@
 import * as assert from 'node:assert';
 import defaultKeys from 'keygrip';
 import request from 'supertest';
-import { Cookies } from '@ts-stack/cookies';
 import express from 'express';
+
+import { Cookies } from '#lib/cookies.js';
 
 const keys = defaultKeys(['a', 'b']);
 

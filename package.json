@@ -16,6 +16,9 @@
       "default": "./dist-mjs/index.js"
     }
   },
+  "imports": {
+    "#lib/*": "./dist-mjs/*"
+  },
   "repository": "https://github.com/ts-stack/cookies",
   "scripts": {
     "build": "tsc -b tsconfig.mjs.json && tsc -b tsconfig.cjs.json && cp package.cjs.json dist-cjs/package.json",
@@ -47,5 +50,8 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.0.1"
+  },
+  "engines": {
+    "node": ">= 18.14.0"
   }
 }

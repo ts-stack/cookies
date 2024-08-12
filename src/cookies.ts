@@ -8,15 +8,27 @@
 import Keygrip from 'keygrip';
 
 import { Cookie } from './cookie.js';
-import { ObjectAny, CookieOptions, NodeRequest, NodeResponse } from './types.js';
+import { CookieOptions, NodeRequest, NodeResponse } from './types.js';
 
-const cache: ObjectAny = {};
+/**
+ * Cache for generated name regular expressions.
+ */
+const REGEXP_CACHE = Object.create(null);
+
+/**
+ * RegExp to match all characters to escape in a RegExp.
+ */
+const REGEXP_ESCAPE_CHARS_REGEXP = /[\^$\\.*+?()[\]{}|]/g;
 
 export class Cookies {
   protected secure?: boolean;
   protected keys?: Keygrip;
 
-  constructor(protected request: NodeRequest, protected response: NodeResponse, options?: CookieOptions) {
+  constructor(
+    protected request: NodeRequest,
+    protected response: NodeResponse,
+    options?: CookieOptions,
+  ) {
     this.secure = undefined;
 
     if (options) {
@@ -52,7 +64,8 @@ export class Cookies {
     const match = header.match(this.getPattern(name));
     if (!match) return;
 
-    const value = match[1];
+    let value = match[1];
+    if (value[0] === '"') value = value.slice(1, -1);
     if (!opts || !signed) return value;
 
     const remote = this.get(sigName);
@@ -84,7 +97,7 @@ export class Cookies {
     const res = this.response;
     const cookie = new Cookie(name, value, opts);
     const signed = opts?.signed !== undefined ? opts.signed : !!this.keys;
-    cookie.secure = opts?.secure !== undefined ? opts.secure : this.secure;
+    cookie.secure = this.secure === undefined ? this.isRequestEncrypted(this.request) : Boolean(this.secure);
 
     const rawHeaders = res.getHeader('Set-Cookie') || [];
     const headers = typeof rawHeaders == 'string' ? [rawHeaders] : (rawHeaders as string[]);
@@ -102,10 +115,22 @@ export class Cookies {
     return this;
   }
 
+  /**
+   * Get the pattern to search for a cookie in a string.
+   */
   protected getPattern(name: string) {
-    if (cache[name]) return cache[name];
+    if (!REGEXP_CACHE[name]) {
+      REGEXP_CACHE[name] = new RegExp('(?:^|;) *' + name.replace(REGEXP_ESCAPE_CHARS_REGEXP, '\\$&') + '=([^;]*)');
+    }
 
-    return (cache[name] = new RegExp('(?:^|;) *' + name.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&') + '=([^;]*)'));
+    return REGEXP_CACHE[name];
+  }
+
+  /**
+   * Get the encrypted status for a request.
+   */
+  protected isRequestEncrypted(req: any) {
+    return req.socket ? req.socket.encrypted : req.connection.encrypted;
   }
 
   protected pushCookie(headers: string[], cookie: Cookie) {

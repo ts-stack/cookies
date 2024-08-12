@@ -11,11 +11,19 @@ describe('new Cookie(name, value, [options])', function () {
     assert.throws(function () {
       new Cookie('foo\n', 'bar');
     }, /argument name is invalid/);
+
+    assert.throws(function () {
+      assert.ok(!new Cookie('foo=', 'bar'));
+    }, /argument name is invalid/);
   });
 
   it('should throw on invalid value', function () {
     assert.throws(function () {
       new Cookie('foo', 'bar\n');
+    }, /argument value is invalid/);
+
+    assert.throws(function () {
+      assert.ok(!new Cookie('foo', 'bar;'));
     }, /argument value is invalid/);
   });
 
@@ -36,6 +44,96 @@ describe('new Cookie(name, value, [options])', function () {
       it('should set the .maxAge property', function () {
         const cookie = new Cookie('foo', 'bar', { maxAge: 86400 });
         assert.equal(cookie.maxAge, 86400);
+      });
+
+      it('should throw on invalid value', function () {
+        assert.throws(function () {
+          new Cookie('foo', 'bar', { maxAge: 'foo' as any });
+        }, /option maxAge is invalid/);
+      });
+
+      it('should throw on Infinity', function () {
+        assert.throws(function () {
+          new Cookie('foo', 'bar', { maxAge: Infinity });
+        }, /option maxAge is invalid/);
+      });
+
+      it('should throw on NaN', function () {
+        assert.throws(function () {
+          new Cookie('foo', 'bar', { maxAge: NaN });
+        }, /option maxAge is invalid/);
+      });
+    });
+
+    describe('partitioned', function () {
+      it('should set the .partitioned property', function () {
+        const cookie = new Cookie('foo', 'bar', { partitioned: true });
+        assert.strictEqual(cookie.partitioned, true);
+      });
+
+      it('should default to false', function () {
+        const cookie = new Cookie('foo', 'bar');
+        assert.strictEqual(cookie.partitioned, false);
+      });
+
+      describe('when set to false', function () {
+        it('should not set partitioned attribute in header', function () {
+          const cookie = new Cookie('foo', 'bar', { partitioned: false });
+          assert.strictEqual(cookie.toHeader(), 'foo=bar; path=/; httponly');
+        });
+      });
+
+      describe('when set to true', function () {
+        it('should set partitioned attribute in header', function () {
+          const cookie = new Cookie('foo', 'bar', { partitioned: true });
+          assert.strictEqual(cookie.toHeader(), 'foo=bar; path=/; httponly; partitioned');
+        });
+      });
+    });
+
+    describe('priority', function () {
+      it('should set the .priority property', function () {
+        const cookie = new Cookie('foo', 'bar', { priority: 'low' });
+        assert.strictEqual(cookie.priority, 'low');
+      });
+
+      it('should default to undefined', function () {
+        const cookie = new Cookie('foo', 'bar');
+        assert.strictEqual(cookie.priority, undefined);
+      });
+
+      it('should throw on invalid value', function () {
+        assert.throws(function () {
+          new Cookie('foo', 'bar', { priority: 'foo' as any });
+        }, /option priority is invalid/);
+      });
+
+      describe('when set to "low"', function () {
+        it('should set "priority=low" attribute in header', function () {
+          const cookie = new Cookie('foo', 'bar', { priority: 'low' });
+          assert.strictEqual(cookie.toHeader(), 'foo=bar; path=/; priority=low; httponly');
+        });
+      });
+
+      describe('when set to "medium"', function () {
+        it('should set "priority=medium" attribute in header', function () {
+          const cookie = new Cookie('foo', 'bar', { priority: 'medium' });
+          assert.strictEqual(cookie.toHeader(), 'foo=bar; path=/; priority=medium; httponly');
+        });
+      });
+
+      describe('when set to "high"', function () {
+        it('should set "priority=high" attribute in header', function () {
+          const cookie = new Cookie('foo', 'bar', { priority: 'high' });
+          assert.strictEqual(cookie.toHeader(), 'foo=bar; path=/; priority=high; httponly');
+        });
+      });
+
+      describe('when set to "HIGH"', function () {
+        it('should set "priority=high" attribute in header', function () {
+          const cookie = new Cookie('foo', 'bar', { priority: 'HIGH' as any });
+          assert.strictEqual(cookie.toHeader(), 'foo=bar; path=/; priority=high; httponly');
+        });
       });
     });
 

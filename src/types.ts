@@ -56,4 +56,16 @@ export class CookieOptions {
   overwrite?: boolean;
 
   keys?: Keygrip | string[];
+  /**
+   * a boolean indicating whether to partition the cookie in Chrome for the [CHIPS Update][1] (`false` by default).
+   * If this is true, Cookies from embedded sites will be partitioned and only readable from the same top
+   * level site from which it was created.
+   * 
+   * [1]: https://developers.google.com/privacy-sandbox/3pcd/chips
+   */
+  partitioned?: boolean;
+  /**
+   * a string indicating the cookie priority. This can be set to `low`, `medium`, or `high`.
+   */
+  priority?: 'low' | 'medium' | 'high';
 }

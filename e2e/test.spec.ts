@@ -1,6 +1,5 @@
 import * as assert from 'node:assert';
 import request from 'supertest';
-import { CookieOptions, Cookies, NodeRequest, NodeResponse } from '@ts-stack/cookies';
 import * as fs from 'node:fs';
 import * as http from 'node:http';
 import * as https from 'node:https';
@@ -8,7 +7,10 @@ import * as path from 'node:path';
 import Keygrip from 'keygrip';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-    
+
+import { Cookies } from '#lib/cookies.js';
+import { CookieOptions, NodeRequest, NodeResponse } from '#lib/types.js';
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 class MockCookies extends Cookies {
@@ -72,6 +74,13 @@ describe('new Cookies(req, res, [options])', function () {
       request(createServer(getCookieHandler('foo')))
         .get('/')
         .set('Cookie', 'foo=bar')
+        .expect(200, 'bar', done);
+    });
+
+    it('should return unquoted value', function (done) {
+      request(createServer(getCookieHandler('foo')))
+        .get('/')
+        .set('Cookie', 'foo="bar"')
         .expect(200, 'bar', done);
     });
 
@@ -327,6 +336,32 @@ describe('new Cookies(req, res, [options])', function () {
           .expect(shouldSetCookieCount(1))
           .expect(shouldSetCookieToValue('foo', 'baz'))
           .expect(shouldSetCookieWithAttributeAndValue('foo', 'path', '/bar'))
+          .end(done);
+      });
+    });
+
+    describe('"partitioned" option', function () {
+      it('should not be set by default', function (done) {
+        request(createServer(setCookieHandler('foo', 'bar')))
+          .get('/')
+          .expect(200)
+          .expect(shouldSetCookieWithoutAttribute('foo', 'partitioned'))
+          .end(done);
+      });
+
+      it('should set to true', function (done) {
+        request(createServer(setCookieHandler('foo', 'bar', { partitioned: true })))
+          .get('/')
+          .expect(200)
+          .expect(shouldSetCookieWithAttribute('foo', 'partitioned'))
+          .end(done);
+      });
+
+      it('should set to false', function (done) {
+        request(createServer(setCookieHandler('foo', 'bar', { partitioned: false })))
+          .get('/')
+          .expect(200)
+          .expect(shouldSetCookieWithoutAttribute('foo', 'partitioned'))
           .end(done);
       });
     });
