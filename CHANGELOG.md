@@ -1,5 +1,12 @@
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/ts-stack/cookies/releases/tag/1.2.0) (2024-08-12)
+
+### Features
+
+- Migration to [cookies v0.9.1](https://github.com/pillarjs/cookies/tree/0.9.1).
+
 <a name="1.1.0"></a>
-# [1.1.0](https://github.com/ts-stack/cookies/releases/tag/1.1.0) (2023-10-09)
+## [1.1.0](https://github.com/ts-stack/cookies/releases/tag/1.1.0) (2023-10-09)
 
 ### Features
 
