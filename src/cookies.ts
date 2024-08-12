@@ -130,7 +130,7 @@ export class Cookies {
    * Get the encrypted status for a request.
    */
   protected isRequestEncrypted(req: any) {
-    return req.socket ? req.socket.encrypted : req.connection.encrypted;
+    return req.socket?.encrypted || req.connection?.encrypted;
   }
 
   protected pushCookie(headers: string[], cookie: Cookie) {
