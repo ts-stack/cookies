@@ -4,3 +4,13 @@ test
 .*
 *.tgz
 HISTORY.md
+dist-e2e
+e2e
+jest.config.ts
+package.cjs.json
+yarn*
+eslint.config.mjs
+tsconfig.e2e.json
+tsconfig.cjs.json
+tsconfig.mjs.json
+CHANGELOG.md

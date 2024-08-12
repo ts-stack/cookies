@@ -1,5 +1,12 @@
+<a name="1.2.1"></a>
+# [1.2.1](https://github.com/ts-stack/cookies/releases/tag/1.2.1) (2024-08-12)
+
+### Bug fix
+
+- Added to `.npmignore` some meta files.
+
 <a name="1.2.0"></a>
-# [1.2.0](https://github.com/ts-stack/cookies/releases/tag/1.2.0) (2024-08-12)
+## [1.2.0](https://github.com/ts-stack/cookies/releases/tag/1.2.0) (2024-08-12)
 
 ### Features
 

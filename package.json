@@ -2,10 +2,9 @@
   "name": "@ts-stack/cookies",
   "type": "module",
   "description": "Cookies, optionally signed using Keygrip.",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": "Jed Schmidt <tr@nslator.jp> (http://jed.is)",
   "license": "MIT",
-  "main": "./dist-cjs/index.js",
   "exports": {
     "./package.json": {
       "default": "./package.json"
