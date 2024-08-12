@@ -27,15 +27,15 @@ npm install @ts-stack/cookies
 
 Create a new cookie jar for a given `request` and `response` pair. The `request` argument is a [Node.js HTTP incoming request object](https://nodejs.org/dist/latest-v16.x/docs/api/http.html#class-httpincomingmessage) and the `response` argument is a [Node.js HTTP server response object](https://nodejs.org/dist/latest-v16.x/docs/api/http.html#class-httpserverresponse).
 
-A [Keygrip](https://www.npmjs.com/package/keygrip) object or an array of keys can optionally be passed as _options.keys_ to enable cryptographic signing based on SHA1 HMAC, using rotated credentials.
+A [Keygrip](https://www.npmjs.com/package/keygrip) object or an array of keys can optionally be passed as `options.keys` to enable cryptographic signing based on SHA1 HMAC, using rotated credentials.
 
 A Boolean can optionally be passed as `options.secure` to explicitally specify if the connection is secure, rather than this module examining `request`.
 
 Note that since this only saves parameters without any other processing, it is very lightweight. Cookies are only parsed on demand when they are accessed.
 
-### Cookies.express(keys)
+### new Cookies(req, res, { keys })
 
-This adds cookie support as a Connect middleware layer for use in Express apps, allowing inbound cookies to be read using `req.cookies.get` and outbound cookies to be set using `res.cookies.set`.
+Option `keys` allowing inbound cookies to be read using `cookies.get` and outbound cookies to be set using `cookies.set`.
 
 ### cookies.get(name [, options])
 

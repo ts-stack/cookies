@@ -54,13 +54,15 @@ export class CookieOptions {
    * are filtered out of the Set-Cookie header when setting this cookie.
    */
   overwrite?: boolean;
-
+  /**
+   * This option allowing inbound cookies to be read using `cookies.get` and outbound cookies to be set using `cookies.set`.
+   */
   keys?: Keygrip | string[];
   /**
    * a boolean indicating whether to partition the cookie in Chrome for the [CHIPS Update][1] (`false` by default).
    * If this is true, Cookies from embedded sites will be partitioned and only readable from the same top
    * level site from which it was created.
-   * 
+   *
    * [1]: https://developers.google.com/privacy-sandbox/3pcd/chips
    */
   partitioned?: boolean;

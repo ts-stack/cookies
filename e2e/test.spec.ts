@@ -16,8 +16,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 class MockCookies extends Cookies {
   declare request: NodeRequest;
   declare response: NodeResponse;
-  declare keys: Keygrip;
-  declare secure: boolean;
 }
 
 describe('new Cookies(req, res, [options])', function () {
@@ -38,7 +36,7 @@ describe('new Cookies(req, res, [options])', function () {
         assertServer(done, function (req: any, res: any) {
           const cookies = new Cookies(req, res, { keys: ['keyboard cat'] }) as MockCookies;
           assert.strictEqual(typeof cookies.keys, 'object');
-          assert.strictEqual(cookies.keys.sign('foo=bar'), 'iW2fuCIzk9Cg_rqLT1CAqrtdWs8');
+          assert.strictEqual(cookies.keys!.sign('foo=bar'), 'iW2fuCIzk9Cg_rqLT1CAqrtdWs8');
         });
       });
 
@@ -47,7 +45,7 @@ describe('new Cookies(req, res, [options])', function () {
           const keys = new Keygrip(['keyboard cat']);
           const cookies = new Cookies(req, res, { keys: keys }) as MockCookies;
           assert.strictEqual(typeof cookies.keys, 'object');
-          assert.strictEqual(cookies.keys.sign('foo=bar'), 'iW2fuCIzk9Cg_rqLT1CAqrtdWs8');
+          assert.strictEqual(cookies.keys!.sign('foo=bar'), 'iW2fuCIzk9Cg_rqLT1CAqrtdWs8');
         });
       });
     });

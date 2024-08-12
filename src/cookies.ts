@@ -21,8 +21,8 @@ const REGEXP_CACHE = Object.create(null);
 const REGEXP_ESCAPE_CHARS_REGEXP = /[\^$\\.*+?()[\]{}|]/g;
 
 export class Cookies {
-  protected secure?: boolean;
-  protected keys?: Keygrip;
+  secure?: boolean;
+  keys?: Keygrip;
 
   constructor(
     protected request: NodeRequest,
