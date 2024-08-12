@@ -1,5 +1,12 @@
+<a name="1.2.2"></a>
+# [1.2.2](https://github.com/ts-stack/cookies/releases/tag/1.2.2) (2024-08-12)
+
+### Bug fix
+
+- Fixed `Cookies#isRequestEncrypted()`.
+
 <a name="1.2.1"></a>
-# [1.2.1](https://github.com/ts-stack/cookies/releases/tag/1.2.1) (2024-08-12)
+## [1.2.1](https://github.com/ts-stack/cookies/releases/tag/1.2.1) (2024-08-12)
 
 ### Bug fix
 
